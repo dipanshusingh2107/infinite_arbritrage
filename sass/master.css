@@ -18,6 +18,12 @@ h1 {
   font-size: 8rem;
 }
 
+h2 {
+  margin-left: 2rem;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
 #graph-img {
   height: 50rem;
   margin-left: auto;
@@ -37,5 +43,12 @@ h1 {
 
 #input_destination {
   height: 2.5rem;
+}
+
+#input_button {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 15rem;
+  font-size: 3rem;
 }
 /*# sourceMappingURL=master.css.map */
