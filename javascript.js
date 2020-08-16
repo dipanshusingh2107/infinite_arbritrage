@@ -19,6 +19,23 @@ function map_making()
     map.set([4,8],13);
 
 
+    map.set([2,1],10);
+    map.set([3,1],7);
+    map.set([6,3],7);
+    map.set([8,6],15);
+    map.set([9,8],5);
+    map.set([7,9],9);
+    map.set([4,7],9);
+    map.set([2,4],15);
+    map.set([6,2],12);
+    map.set([7,6],22);
+    map.set([2,5],10);
+    map.set([3,5],15);
+    map.set([8,5],8);
+    map.set([7,5],12);
+    map.set([8,4],13);
+
+
 
     return map;
 }
@@ -95,7 +112,7 @@ function shortest_path(graph,src,dest)
 function main()
 {
     var graph= [
-        ["This is here to make indexing one based"]
+        [0,0],  //only here to make indexing one based
         [2,3],
         [1,5,4,6] ,
         [1,5,6] ,
@@ -112,7 +129,7 @@ function main()
     var src= (document.querySelector("#input_source").value);
     var dest= (document.querySelector("#input_destination").value);
 
-    console.log(graph[2][2]);
+    console.log(graph[2]);
    
     shortest_path(graph,src,dest);
 
