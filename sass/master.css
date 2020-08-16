@@ -12,4 +12,30 @@ html {
 body {
   background-color: rgba(180, 248, 245, 0.459);
 }
+
+h1 {
+  text-align: center;
+  font-size: 8rem;
+}
+
+#graph-img {
+  height: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#input {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 3rem;
+}
+
+#input_source {
+  height: 2.5rem;
+}
+
+#input_destination {
+  height: 2.5rem;
+}
 /*# sourceMappingURL=master.css.map */

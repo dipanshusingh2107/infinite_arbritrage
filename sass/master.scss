@@ -5,7 +5,10 @@
 
 
 @import "base/base.scss";
+@import "base/topography";
 
 
+@import "components/img.scss";
+@import "components/input";
 
-@import "pages/home.scss"
+@import "pages/home.scss";
