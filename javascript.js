@@ -1,48 +1,3 @@
-/*
-function map_making()
-{
-    var map=new Map();
-    map.set([1,2],10);
-    map.set([1,3],7);
-    map.set([3,6],7);
-    map.set([6,8],15);
-    map.set([8,9],5);
-    map.set([9,7],9);
-    map.set([7,4],9);
-    map.set([4,2],15);
-    map.set([2,6],12);
-    map.set([6,7],22);
-    map.set([5,2],10);
-    map.set([5,3],15);
-    map.set([5,8],8);
-    map.set([5,7],12);
-    map.set([4,8],13);
-
-
-    map.set([2,1],10);
-    map.set([3,1],7);
-    map.set([6,3],7);
-    map.set([8,6],15);
-    map.set([9,8],5);
-    map.set([7,9],9);
-    map.set([4,7],9);
-    map.set([2,4],15);
-    map.set([6,2],12);
-    map.set([7,6],22);
-    map.set([2,5],10);
-    map.set([3,5],15);
-    map.set([8,5],8);
-    map.set([7,5],12);
-    map.set([8,4],13);
-
-
-
-    return map;
-}
-
-*/
-
-
 function path(parent,dest)
 {
     var stack=[];
@@ -56,14 +11,15 @@ function path(parent,dest)
     }
     stack.pop();
 
-    var answer="Shortest_Path ";
-    while(!stack.isEmpty()){
+    var answer="Shortest Path: ";
+    while(!stack.length==0){
 
-        answer =answer+stack.peek()+" ->";
-        stack.pop();
+        answer =answer+stack.pop()+" ->";
+        
     }
+
     console.log(answer);
-    document.querySelector('#answer').innerHTML=answer;
+    document.querySelector('#answer').innerHTML=answer+"END";
 
 }
 
@@ -116,7 +72,7 @@ function shortest_path(graph,src,dest)
         }
     }
     
-   
+   path(parent,dest);
     console.log(distance[dest]);
         
 }
