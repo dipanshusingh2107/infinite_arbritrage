@@ -39,13 +39,11 @@ function shortest_path(graph,src,dest)
     var parent = [];
     parent[src]= -1;
 
-    //var length=[0,2,4,3,3,4,4,4,4,2];
+    
 
-    //var map= map_making();
-
-    var weight=[
+    var weight=[ //change this 
         [0,0], //only to make one based indexing
-        [10,7],
+        [10,7], //node1 
         [10,10,15,12],
         [7,15,7],
         [15,9,13],
@@ -61,7 +59,7 @@ function shortest_path(graph,src,dest)
     {
         for(j=1;j<=9;j++)
         {
-            for(k=0;k<graph[j].length;k++)
+            for(k=0;k<graph[j].length;k++)   // j->k
             {
                 if(distance[graph[j][k]]> distance[j]+weight[j][k] )
                 {
@@ -71,6 +69,10 @@ function shortest_path(graph,src,dest)
             }
         }
     }
+
+        //important code: to check negative cycle
+        //modify product>1;
+
     
    path(parent,dest);
     console.log(distance[dest]);
@@ -82,10 +84,10 @@ function shortest_path(graph,src,dest)
 
 function main()
 {
-    var graph= [
+    var graph= [  //change this
         [0,0],  //only here to make indexing one based
-        [2,3],
-        [1,5,4,6] ,
+        [2,3],  //node 1 connection
+        [1,5,4,6] , //node 2 
         [1,5,6] ,
         [2,7,8] ,
         [2,3,7,8] ,
