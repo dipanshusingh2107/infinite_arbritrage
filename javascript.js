@@ -1,80 +1,100 @@
-function path(parent,dest)
+function path(child,src,distance,weight)
 {
-    var stack=[];
-    stack.push(dest);
-    var i=dest;
+    var queue=[],multiply, profit=0,j=1,k=0;
+   
+    var i=src;
+    var answer=distance[src] + distance[child[src]];
+    multiply= weight[src][child[src]];
+    queue[0]=src;
+    i=child[src];
+    while(i != src)
+    {   
+        queue[j]=i;
+        answer=answer + distance[child[i]];
+        multiply=multiply*weight[i][child[i]];
+        i=child[i];
+        j++;   
+    }
+   
+    queue[j]=src;
+    var solution= "Path";
 
-    while(i != -1)
+     
+    if (answer>0) 
     {
-        i=parent[i];
-        stack.push(i);
+      while(k<=j)
+      {   
+        solution =solution+queue[k]+" ->"; 
+        profit= (multiply-1)*100;
+      }
+
+      console.log(answer);
+      document.querySelector('#answer').innerHTML=solution+profit+"END";
+   
+
     }
-    stack.pop();
-
-    var answer="Shortest Path: ";
-    while(!stack.length==0){
-
-        answer =answer+stack.pop()+" ->";
-        
-    }
-
-    console.log(answer);
-    document.querySelector('#answer').innerHTML=answer+"END";
-
+     else
+      {
+        console.log(answer);
+        document.querySelector('#answer').innerHTML="No profit is possible";
+      }
+    
 }
 
 
 
 
-function shortest_path(graph,src,dest)
+function shortest_path(graph,src)
 {
     
     var distance=[];
 
-    for(i=0;i<=9;i++)
+    for(i=0;i<=5;i++)
     distance.push(9999999);
 
-    distance[src]=0;
+    distance[src]=1;
     
-    var parent = [];
-    parent[src]= -1;
+    var child = [];
 
-    
+    //var length=[0,2,4,3,3,4,4,4,4,2];
 
-    var weight=[ //change this 
+    //var map= map_making();
+
+    var weight=[
         [0,0], //only to make one based indexing
-        [10,7], //node1 
-        [10,10,15,12],
-        [7,15,7],
-        [15,9,13],
-        [10,15,12,8],
-        [15,7,22,15],
-        [9,12,22,9],
-        [13,8,15,5],
-        [9,5]
+        [0.01335,0.01856,0.010114,0.01758],
+        [74.8620,1.3917,0.75774,1.31950],
+        [53.7770,0.71824,0.5442,0.947880],
+        [98.8068,1.3199,1.837710,1.74198],
+        [56.724,0.7576,1.0547,0.5737]
     ];
 
-    
-    for(i=1;i<9;i++)
+    var logweight=[][4];
+    for(i=1;i<6;i++)
     {
-        for(j=1;j<=9;j++)
+        for(j=0;j<4;j++)
         {
-            for(k=0;k<graph[j].length;k++)   // j->k
+            logweight[i][j]=(Math.log(weight[i][j]));
+        }
+    }       
+
+    
+    for(i=1;i<5;i++)
+    {
+        for(j=1;j<=5;j++)
+        {
+            for(k=0;k<graph[j].length;k++)
             {
-                if(distance[graph[j][k]]> distance[j]+weight[j][k] )
+                if(distance[graph[j][k]]> distance[j]+logweight[j][k] )
                 {
-                    distance[graph[j][k]]=distance[j]+ weight[j][k];
-                    parent[graph[j][k]]=j;
+                    distance[graph[j][k]]=distance[j]+ logweight[j][k];
+                    child[j]=graph[j][k];
                 }
             }
         }
     }
-
-        //important code: to check negative cycle
-        //modify product>1;
-
     
-   path(parent,dest);
+   path(child,src,distance,weight);
     console.log(distance[dest]);
         
 }
@@ -84,25 +104,20 @@ function shortest_path(graph,src,dest)
 
 function main()
 {
-    var graph= [  //change this
+    var graph= [
         [0,0],  //only here to make indexing one based
-        [2,3],  //node 1 connection
-        [1,5,4,6] , //node 2 
-        [1,5,6] ,
-        [2,7,8] ,
-        [2,3,7,8] ,
-        [2,3,7,8] ,
-        [4,5,6,9] ,
-        [4,5,6,9] ,
-        [7,8]
+        [2,3,4,5],
+        [1,3,4,5],
+        [1,2,4,5],
+        [1,2,3,5],
+        [1,2,3,4]
     ];
-    var e=15;
-    var n=9;
+    var e=20;
+    var n=5;
 
     var src= (document.querySelector("#input_source").value);
-    var dest= (document.querySelector("#input_destination").value);
 
-    shortest_path(graph,src,dest);
+    shortest_path(graph,src);
 
 }
 
