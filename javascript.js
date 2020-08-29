@@ -69,14 +69,14 @@ function shortest_path(graph,src)
 
 
     var logweight=[];  
-    logweight.push(0);
+    logweight.push(0);  //for 1 based indexing
     
     for(i=1;i<6;i++)
     {
         var temp=[];
         for(j=0;j<4;j++)
         {
-            var t=Math.log(weight[i][j]);
+            var t= -1*Math.log(weight[i][j]);
             temp.push(t);
         }
         logweight.push(temp);
@@ -97,8 +97,27 @@ function shortest_path(graph,src)
             }
         }
     }
-    
-   path(child,src,distance,weight);
+
+
+    //negative cycle check???
+
+
+    for(i=1;i<5;i++)
+    {
+        for(j=1;j<=5;j++)
+        {
+            for(k=0;k<graph[j].length;k++)
+            {
+                if(distance[graph[j][k]]> distance[j]+logweight[j][k] )
+                {
+                    distance[graph[j][k]]=distance[j]+ logweight[j][k];
+                    child[j]=graph[j][k];
+                    path(child,graph[j][k],distance,weight); 
+                }
+            }
+        }
+    }
+
    
         
 }
