@@ -56,26 +56,30 @@ function shortest_path(graph,src)
     
     var child = [];
 
-    //var length=[0,2,4,3,3,4,4,4,4,2];
-
-    //var map= map_making();
-
     var weight=[
         [0,0], //only to make one based indexing
         [0.01335,0.01856,0.010114,0.01758],
-        [74.8620,1.3917,0.75774,1.31950],
+        [74.8620,1.3917,0.75774,1.333],
         [53.7770,0.71824,0.5442,0.947880],
         [98.8068,1.3199,1.837710,1.74198],
         [56.724,0.7576,1.0547,0.5737]
     ];
 
-    var logweight=[][4];
+        // usd->cad  =1.333 instead of 1.31950
+
+
+    var logweight=[];  
+    logweight.push(0);
+    
     for(i=1;i<6;i++)
     {
+        var temp=[];
         for(j=0;j<4;j++)
         {
-            logweight[i][j]=(Math.log(weight[i][j]));
+            var t=Math.log(weight[i][j]);
+            temp.push(t);
         }
+        logweight.push(temp);
     }       
 
     
@@ -95,7 +99,7 @@ function shortest_path(graph,src)
     }
     
    path(child,src,distance,weight);
-    console.log(distance[dest]);
+   
         
 }
 
