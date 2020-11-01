@@ -1,46 +1,25 @@
-function path(child,src,distance,weight)
+function path(parent,dest)
 {
-    var queue=[],multiply, profit=0,j=1,k=0;
-   
-    var i=src;
-    var answer=distance[src] + distance[child[src]];
-    multiply= weight[src][child[src]];
-    queue[0]=src;
-    i=child[src];
-    while(i != src)
-    {   
-        queue[j]=i;
-        answer=answer + distance[child[i]];
-        multiply=multiply*weight[i][child[i]];
-        i=child[i];
-        j++;   
-    }
-   
-    queue[j]=src;
-    var solution= "Path";
-
-     
-    if (answer>0) 
-    {
-      while(k<=j)
-      {   
-        solution =solution+queue[k]+" ->"; 
-        profit= (multiply-1)*100;
-      }
-
-      console.log(answer);
-      document.querySelector('#answer').innerHTML=solution+profit+"END";
-   
-
-    }
-     else
-      {
-        console.log(answer);
-        document.querySelector('#answer').innerHTML="No profit is possible";
-      }
+    var queue=[];
+    var i=dest;
     
-}
+    while(queue.indexOf(i)==-1)  //error in this loop
+    {
+        queue.push(i);
+        i=parent[i];
+    }
+    
+    var answer="Shortest Path: ";
+    while(!queue.length==0){
 
+        answer =answer+queue.shift()+" ->";
+        
+    }
+
+    console.log(answer);
+    document.querySelector('#answer').innerHTML=answer;
+
+}
 
 
 
@@ -49,20 +28,21 @@ function shortest_path(graph,src)
     
     var distance=[];
 
-    for(i=0;i<=5;i++)
+    for(i=0;i<6;i++)
     distance.push(9999999);
 
-    distance[src]=1;
+    distance[src]=0;
     
-    var child = [];
+    var parent = [];
+    parent[src]= -1;
 
     var weight=[
         [0,0], //only to make one based indexing
-        [0.01335,0.01856,0.010114,0.01758],
-        [74.8620,1.3917,0.75774,1.333],
-        [53.7770,0.71824,0.5442,0.947880],
-        [98.8068,1.3199,1.837710,1.74198],
-        [56.724,0.7576,1.0547,0.5737]
+        [0.01335,0.01856,0.010114,0.01758],  //INR
+        [74.8620,1.3917,0.75774,1.333],     //USD
+        [53.7770,0.71824,0.5442,0.947880],  //AUD
+        [98.8068,1.3199,1.837710,1.74198],  //GBP
+        [56.724,0.7576,1.0547,0.5737]       //CAD
     ];
 
         // usd->cad  =1.333 instead of 1.31950
@@ -92,15 +72,17 @@ function shortest_path(graph,src)
                 if(distance[graph[j][k]]> distance[j]+logweight[j][k] )
                 {
                     distance[graph[j][k]]=distance[j]+ logweight[j][k];
-                    child[j]=graph[j][k];
+                    parent[graph[j][k]]=j;
                 }
             }
         }
     }
-
-
+    
+    
+   
     //negative cycle check???
 
+    flag = 0;
 
     for(i=1;i<5;i++)
     {
@@ -111,13 +93,23 @@ function shortest_path(graph,src)
                 if(distance[graph[j][k]]> distance[j]+logweight[j][k] )
                 {
                     distance[graph[j][k]]=distance[j]+ logweight[j][k];
-                    child[j]=graph[j][k];
-                    path(child,graph[j][k],distance,weight); 
+                    parent[graph[j][k]]=j;
+                    flag++;break;
                 }
             }
+
+            if(flag)
+            break;
         }
+        if(flag)
+        break;
     }
 
+    if(flag)        // write an else statement to print no -ve cycle found
+    path(parent,src);  
+    
+    for(i=1;i<6;i++)
+    console.log(parent[i]);
    
         
 }
