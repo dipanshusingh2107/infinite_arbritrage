@@ -1,22 +1,29 @@
 function path(parent,dest)
 {
-    var queue=[];
-    var i=dest;
+    var stack=[];
+    var i=parent[dest];
     
-    while(queue.indexOf(i)==-1)  //error in this loop
+    while(stack.indexOf(i)==-1)  //error in this loop
     {
-        queue.push(i);
+        stack.push(i);
         i=parent[i];
     }
     
     var answer="Shortest Path: ";
-    while(!queue.length==0){
+    // // for(i=0;i<stack.length;i++)
+    // // console.log(stack[i]);
+    // console.log(stack[-1]);
 
-        answer =answer+queue.shift()+" ->";
+    if(stack[stack.length-1]!=dest)
+    answer+= dest + "->";
+
+    while(!stack.length==0){
+
+        answer =answer+stack.pop()+" ->";
         
     }
 
-    console.log(answer);
+
     document.querySelector('#answer').innerHTML=answer;
 
 }
@@ -108,8 +115,6 @@ function shortest_path(graph,src)
     if(flag)        // write an else statement to print no -ve cycle found
     path(parent,src);  
     
-    for(i=1;i<6;i++)
-    console.log(parent[i]);
    
         
 }
