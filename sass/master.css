@@ -31,21 +31,21 @@ h2 {
   display: block;
 }
 
-#input {
+.input {
   text-align: center;
   margin-top: 4rem;
   font-size: 3rem;
 }
 
-#input_source {
+.input_source {
   height: 2.5rem;
 }
 
-#input_destination {
+.input_destination {
   height: 2.5rem;
 }
 
-#input_button {
+.input_button {
   margin-top: 3rem;
   margin-bottom: 3rem;
   width: 15rem;
