@@ -1,3 +1,4 @@
+
 function path(parent,dest,id)
 {
     var stack=[];
@@ -15,7 +16,7 @@ function path(parent,dest,id)
     // // console.log(stack[i]);
     // console.log(stack[-1]);
 
-    if(stack[stack.length-1]!=dest)
+    if(stack.indexOf(dest) == -1)
     answer+= dest + "->";
 
     while(!stack.length==0){
@@ -137,11 +138,12 @@ function main2()
         [0,0], //only to make one based indexing
         [0.01335,0.01856,0.010114,0.01758],  //INR
         [74.8620,1.3917,0.75774,1.31950],     //USD
-        [53.7770,0.71824,0.5441,0.947880],  //AUD
+        [53.7770,0.72,0.5441,0.947880],  //AUD
         [98.8068,1.31,1.837710,1.74198],  //GBP
         [56.724,0.7576,1.0547,0.5737]       //CAD
     ];  //changed gbp to usd from 1.3199 to 1.31
-        //changed AUD to GBP from 0.5441 to 0.5442
+        //changed AUD to GBP from 0.5442 to 0.5441
+        //changed AUD to USD from 0.71824 to 0.72
 
     var e=20;
     var n=5;
@@ -167,12 +169,12 @@ function main3()
         [0,0], //only to make one based indexing
         [0.01335,0.01856,0.010114,0.01758],  //INR
         [74.8620,1.3917,0.75774,1.31950],     //USD
-        [53.7770,0.71824,0.599,0.947880],  //AUD
-        [98.8068,1.3199,1.837710,1.79],  //GBP
+        [53.7770,0.71824,0.5442,0.947880],  //AUD
+        [98.8068,1.3197,1.837,1.7418],  //GBP
         [56.724,0.7576,1.0547,0.5737]       //CAD
     ];  
-    // changed AUD->GBP 0.599 instead of 0.5442
-    //changed GBP->CAD 1.79 instead of 1.74198
+    //changed GBP->AUD 1.837 instead of 1.837710
+    //changed GBP->USD 1.3197 isnstead of 1.3199
 
     var src= (document.querySelector("#input_source3").value);
 
