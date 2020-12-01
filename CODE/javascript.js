@@ -4,7 +4,7 @@ function path(parent,dest,id)
     var stack=[];
     var i=parent[dest];
     
-    while(stack.indexOf(i)==-1)  //error in this loop
+    while(stack.indexOf(i)==-1)  
     {
         stack.push(i);
         i=parent[i];
